@@ -1,0 +1,39 @@
+Video Demonstration Link
+CSCI 341 - Assignment 3 - Part 3
+Online Caregivers Platform Web Application
+
+========================================
+
+VIDEO LINK:
+[Paste your Google Drive or YouTube link here]
+
+Example: https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing
+
+========================================
+
+IMPORTANT NOTES:
+
+1. Make sure the link is set to "Anyone with the link can view"
+2. Test the link in an incognito/private browser window
+3. Video should demonstrate:
+   - Home page and navigation
+   - CRUD operations for multiple tables
+   - Foreign key relationships
+   - Deployed application (if applicable)
+4. Keep video duration under 10 minutes
+5. Ensure audio is clear
+
+========================================
+
+DEPLOYED APPLICATION URL (if applicable):
+[Paste your PythonAnywhere or other hosting URL here]
+
+Example: http://yourusername.pythonanywhere.com
+
+========================================
+
+Student Name(s): [Your name(s) here]
+Student ID(s): [Your ID(s) here]
+Date: November 24, 2025
+
+========================================

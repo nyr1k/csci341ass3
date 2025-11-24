@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Job Applications{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Job Applications</h2>
+    <a href="{{ url_for('job_applications_create') }}" class="btn btn-primary">+ Add New Application</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Caregiver</th>
+            <th>Care Type</th>
+            <th>Job ID</th>
+            <th>Posted By</th>
+            <th>Requirements</th>
+            <th>Date Applied</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in applications %}
+        <tr>
+            <td>{{ app.caregiver_name }} {{ app.caregiver_surname }}</td>
+            <td>{{ app.j_care_type }}</td>
+            <td>{{ app.ja_job_id }}</td>
+            <td>{{ app.member_name }} {{ app.member_surname }}</td>
+            <td class="truncate">{{ app.j_reqs }}</td>
+            <td>{{ app.ja_date_applied }}</td>
+            <td class="actions">
+                <form method="POST" action="{{ url_for('job_applications_delete', caregiver_id=app.ja_caregiver_id, job_id=app.ja_job_id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" style="text-align: center;">No job applications found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

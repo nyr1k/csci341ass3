@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Add New User{% endblock %}
+
+{% block content %}
+<h2>Add New User</h2>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="user_id">User ID:</label>
+        <input type="number" id="user_id" name="user_id" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" maxlength="32" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="name">First Name:</label>
+        <input type="text" id="name" name="name" maxlength="32" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" maxlength="32" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" maxlength="32" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" maxlength="20" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="profile_descr">Profile Description:</label>
+        <textarea id="profile_descr" name="profile_descr" rows="4"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" maxlength="15" required>
+    </div>
+    
+    <div class="actions">
+        <button type="submit" class="btn btn-success">Create User</button>
+        <a href="{{ url_for('users_list') }}" class="btn btn-warning">Cancel</a>
+    </div>
+</form>
+{% endblock %}

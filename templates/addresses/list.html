@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Addresses{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Addresses</h2>
+    <a href="{{ url_for('addresses_create') }}" class="btn btn-primary">+ Add New Address</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Member ID</th>
+            <th>Member Name</th>
+            <th>House Number</th>
+            <th>Street</th>
+            <th>Town</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for address in addresses %}
+        <tr>
+            <td>{{ address.a_member_id }}</td>
+            <td>{{ address.u_name }} {{ address.u_surname }}</td>
+            <td>{{ address.a_house_number }}</td>
+            <td>{{ address.a_street }}</td>
+            <td>{{ address.a_town }}</td>
+            <td class="actions">
+                <a href="{{ url_for('addresses_edit', member_id=address.a_member_id) }}" class="btn btn-warning btn-small">Edit</a>
+                <form method="POST" action="{{ url_for('addresses_delete', member_id=address.a_member_id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" style="text-align: center;">No addresses found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

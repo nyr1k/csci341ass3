@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Appointments</h2>
+    <a href="{{ url_for('appointments_create') }}" class="btn btn-primary">+ Create New Appointment</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Caregiver</th>
+            <th>Member</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Work Hours</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.appointment_id }}</td>
+            <td>{{ appointment.caregiver_name }} {{ appointment.caregiver_surname }}</td>
+            <td>{{ appointment.member_name }} {{ appointment.member_surname }}</td>
+            <td>{{ appointment.ap_date }}</td>
+            <td>{{ appointment.ap_time }}</td>
+            <td>{{ appointment.ap_work_hours }}</td>
+            <td>
+                {% if appointment.ap_status == 'accepted' %}
+                <span style="padding: 4px 8px; border-radius: 4px; background-color: #d4edda; color: #155724;">
+                    {{ appointment.ap_status }}
+                </span>
+                {% elif appointment.ap_status == 'pending' %}
+                <span style="padding: 4px 8px; border-radius: 4px; background-color: #fff3cd; color: #856404;">
+                    {{ appointment.ap_status }}
+                </span>
+                {% else %}
+                <span style="padding: 4px 8px; border-radius: 4px; background-color: #f8d7da; color: #721c24;">
+                    {{ appointment.ap_status }}
+                </span>
+                {% endif %}
+            </td>
+            <td class="actions">
+                <a href="{{ url_for('appointments_edit', id=appointment.appointment_id) }}" class="btn btn-warning btn-small">Edit</a>
+                <form method="POST" action="{{ url_for('appointments_delete', id=appointment.appointment_id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="8" style="text-align: center;">No appointments found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

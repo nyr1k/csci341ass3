@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Online Caregivers Platform{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 2rem;">
+    <h2 style="color: #667eea; margin-bottom: 1rem;">Welcome to the Online Caregivers Platform</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+        A comprehensive database management system for connecting caregivers with families
+    </p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 2rem;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 10px; color: white;">
+            <h3 style="margin-bottom: 1rem;">👥 Users</h3>
+            <p>Manage all platform users</p>
+            <a href="{{ url_for('users_list') }}" class="btn btn-success" style="margin-top: 1rem;">View Users</a>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem; border-radius: 10px; color: white;">
+            <h3 style="margin-bottom: 1rem;">👨‍⚕️ Caregivers</h3>
+            <p>Browse caregiver profiles</p>
+            <a href="{{ url_for('caregivers_list') }}" class="btn btn-success" style="margin-top: 1rem;">View Caregivers</a>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 2rem; border-radius: 10px; color: white;">
+            <h3 style="margin-bottom: 1rem;">👨‍👩‍👧‍👦 Members</h3>
+            <p>Manage family members</p>
+            <a href="{{ url_for('members_list') }}" class="btn btn-success" style="margin-top: 1rem;">View Members</a>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 2rem; border-radius: 10px; color: white;">
+            <h3 style="margin-bottom: 1rem;">🏠 Addresses</h3>
+            <p>View member addresses</p>
+            <a href="{{ url_for('addresses_list') }}" class="btn btn-success" style="margin-top: 1rem;">View Addresses</a>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 2rem; border-radius: 10px; color: white;">
+            <h3 style="margin-bottom: 1rem;">💼 Jobs</h3>
+            <p>Browse job postings</p>
+            <a href="{{ url_for('jobs_list') }}" class="btn btn-success" style="margin-top: 1rem;">View Jobs</a>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); padding: 2rem; border-radius: 10px; color: white;">
+            <h3 style="margin-bottom: 1rem;">📝 Applications</h3>
+            <p>Manage job applications</p>
+            <a href="{{ url_for('job_applications_list') }}" class="btn btn-success" style="margin-top: 1rem;">View Applications</a>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 2rem; border-radius: 10px; color: #333;">
+            <h3 style="margin-bottom: 1rem;">📅 Appointments</h3>
+            <p>Schedule and manage appointments</p>
+            <a href="{{ url_for('appointments_list') }}" class="btn btn-primary" style="margin-top: 1rem;">View Appointments</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

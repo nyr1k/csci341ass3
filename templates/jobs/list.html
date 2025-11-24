@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Jobs</h2>
+    <a href="{{ url_for('jobs_create') }}" class="btn btn-primary">+ Post New Job</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Job ID</th>
+            <th>Posted By</th>
+            <th>Care Type</th>
+            <th>Requirements</th>
+            <th>Date Posted</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.job_id }}</td>
+            <td>{{ job.u_name }} {{ job.u_surname }}</td>
+            <td>{{ job.j_care_type }}</td>
+            <td class="truncate">{{ job.j_reqs }}</td>
+            <td>{{ job.j_date_post }}</td>
+            <td class="actions">
+                <a href="{{ url_for('jobs_edit', id=job.job_id) }}" class="btn btn-warning btn-small">Edit</a>
+                <form method="POST" action="{{ url_for('jobs_delete', id=job.job_id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" style="text-align: center;">No jobs found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

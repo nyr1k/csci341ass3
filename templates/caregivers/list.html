@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Caregivers{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Caregivers</h2>
+    <a href="{{ url_for('caregivers_create') }}" class="btn btn-primary">+ Add New Caregiver</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>Gender</th>
+            <th>Care Type</th>
+            <th>Hourly Rate</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for caregiver in caregivers %}
+        <tr>
+            <td>{{ caregiver.caregiver_id }}</td>
+            <td>{{ caregiver.u_name }} {{ caregiver.u_surname }}</td>
+            <td>{{ caregiver.u_email }}</td>
+            <td>{{ caregiver.u_city }}</td>
+            <td>{{ caregiver.c_gender }}</td>
+            <td>{{ caregiver.c_care_type }}</td>
+            <td>${{ caregiver.c_hourly_rate }}</td>
+            <td class="truncate">{{ caregiver.c_photo }}</td>
+            <td class="actions">
+                <a href="{{ url_for('caregivers_edit', id=caregiver.caregiver_id) }}" class="btn btn-warning btn-small">Edit</a>
+                <form method="POST" action="{{ url_for('caregivers_delete', id=caregiver.caregiver_id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="9" style="text-align: center;">No caregivers found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

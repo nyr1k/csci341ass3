@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Members{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Members</h2>
+    <a href="{{ url_for('members_create') }}" class="btn btn-primary">+ Add New Member</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>House Rules</th>
+            <th>Dependent Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.member_id }}</td>
+            <td>{{ member.u_name }} {{ member.u_surname }}</td>
+            <td>{{ member.u_email }}</td>
+            <td>{{ member.u_city }}</td>
+            <td class="truncate">{{ member.m_house_rules }}</td>
+            <td class="truncate">{{ member.m_depend_descr }}</td>
+            <td class="actions">
+                <a href="{{ url_for('members_edit', id=member.member_id) }}" class="btn btn-warning btn-small">Edit</a>
+                <form method="POST" action="{{ url_for('members_delete', id=member.member_id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                    <button type="submit" class="btn btn-danger btn-small">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" style="text-align: center;">No members found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

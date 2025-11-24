@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Post New Job{% endblock %}
+
+{% block content %}
+<h2>Post New Job</h2>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="job_id">Job ID:</label>
+        <input type="number" id="job_id" name="job_id" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="member_id">Posted By (Member):</label>
+        <select id="member_id" name="member_id" required>
+            <option value="">-- Select a member --</option>
+            {% for member in members %}
+            <option value="{{ member.member_id }}">{{ member.member_id }} - {{ member.u_name }} {{ member.u_surname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="care_type">Caregiving Type:</label>
+        <select id="care_type" name="care_type" required>
+            <option value="">-- Select type --</option>
+            <option value="babysitter">Babysitter</option>
+            <option value="elder">Elderly Care</option>
+            <option value="playmate">Playmate for Children</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="reqs">Requirements:</label>
+        <textarea id="reqs" name="reqs" rows="4" placeholder="e.g., Soft-spoken, experienced in elderly care, 09:00-12:00 daily"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="date_post">Date Posted:</label>
+        <input type="date" id="date_post" name="date_post" required>
+    </div>
+    
+    <div class="actions">
+        <button type="submit" class="btn btn-success">Post Job</button>
+        <a href="{{ url_for('jobs_list') }}" class="btn btn-warning">Cancel</a>
+    </div>
+</form>
+{% endblock %}

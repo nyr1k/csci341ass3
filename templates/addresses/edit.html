@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Address{% endblock %}
+
+{% block content %}
+<h2>Edit Address for: {{ address.u_name }} {{ address.u_surname }}</h2>
+
+<form method="POST">
+    <div class="form-group">
+        <label>Member:</label>
+        <input type="text" value="{{ address.a_member_id }} - {{ address.u_name }} {{ address.u_surname }}" disabled>
+    </div>
+    
+    <div class="form-group">
+        <label for="house_number">House Number:</label>
+        <input type="number" id="house_number" name="house_number" value="{{ address.a_house_number }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" maxlength="32" value="{{ address.a_street }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="town">Town:</label>
+        <input type="text" id="town" name="town" maxlength="32" value="{{ address.a_town }}" required>
+    </div>
+    
+    <div class="actions">
+        <button type="submit" class="btn btn-success">Update Address</button>
+        <a href="{{ url_for('addresses_list') }}" class="btn btn-warning">Cancel</a>
+    </div>
+</form>
+{% endblock %}
