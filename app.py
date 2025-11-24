@@ -26,22 +26,8 @@ except ImportError:
 
 # Override with environment variables for deployment (Render, Heroku, etc.)
 if os.environ.get('DATABASE_URL'):
-    # Parse DATABASE_URL for Render/Heroku
-    import re
-    db_url = os.environ.get('DATABASE_URL')
-    if db_url.startswith('postgres://'):
-        db_url = db_url.replace('postgres://', 'postgresql://', 1)
-    
-    # Parse the URL
-    match = re.match(r'postgresql://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', db_url)
-    if match:
-        DB_CONFIG = {
-            'user': match.group(1),
-            'password': match.group(2),
-            'host': match.group(3),
-            'port': match.group(4),
-            'dbname': match.group(5)
-        }
+    # DATABASE_URL is handled directly in get_db_connection
+    pass
 elif os.environ.get('DB_HOST'):
     # Use individual environment variables
     DB_CONFIG = {
@@ -60,6 +46,11 @@ app.secret_key = SECRET_KEY
 
 def get_db_connection():
     """Create and return a database connection"""
+    if os.environ.get('DATABASE_URL'):
+        url = os.environ.get('DATABASE_URL')
+        if url.startswith('postgres://'):
+            url = url.replace('postgres://', 'postgresql://', 1)
+        return psycopg2.connect(url)
     conn = psycopg2.connect(**DB_CONFIG)
     return conn
 
