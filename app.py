@@ -24,6 +24,37 @@ except ImportError:
     SECRET_KEY = 'your-secret-key-change-this-in-production'
     DEBUG = True
 
+# Override with environment variables for deployment (Render, Heroku, etc.)
+if os.environ.get('DATABASE_URL'):
+    # Parse DATABASE_URL for Render/Heroku
+    import re
+    db_url = os.environ.get('DATABASE_URL')
+    if db_url.startswith('postgres://'):
+        db_url = db_url.replace('postgres://', 'postgresql://', 1)
+    
+    # Parse the URL
+    match = re.match(r'postgresql://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', db_url)
+    if match:
+        DB_CONFIG = {
+            'user': match.group(1),
+            'password': match.group(2),
+            'host': match.group(3),
+            'port': match.group(4),
+            'dbname': match.group(5)
+        }
+elif os.environ.get('DB_HOST'):
+    # Use individual environment variables
+    DB_CONFIG = {
+        'dbname': os.environ.get('DB_NAME', DB_CONFIG.get('dbname')),
+        'user': os.environ.get('DB_USER', DB_CONFIG.get('user')),
+        'password': os.environ.get('DB_PASSWORD', DB_CONFIG.get('password')),
+        'host': os.environ.get('DB_HOST', DB_CONFIG.get('host')),
+        'port': os.environ.get('DB_PORT', DB_CONFIG.get('port', '5432'))
+    }
+
+if os.environ.get('SECRET_KEY'):
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
